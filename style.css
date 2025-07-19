@@ -1452,3 +1452,8 @@ body.dark-mode {
     color: var(--secondary-color);
 }
 
+/* Netlify Forms - Masquer le champ honeypot */
+.hidden {
+    display: none;
+}
+

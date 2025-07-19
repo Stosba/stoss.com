@@ -199,7 +199,7 @@ function animateCard(card) {
     }, delay);
 }
 
-// Formulaire de contact
+// Formulaire de contact mailto
 function initContactForm() {
     const form = document.querySelector('.contact-form');
     if (!form) {
@@ -220,15 +220,53 @@ function initContactForm() {
         });
     });
     
-    // Soumission du formulaire
+    // Soumission du formulaire mailto
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
         if (validateForm()) {
-            showSuccessMessage();
-            form.reset();
+            sendMailto();
         }
     });
+}
+
+// Fonction pour créer et ouvrir le mailto
+function sendMailto() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const service = document.getElementById('service').value;
+    const message = document.getElementById('message').value;
+    
+    // Créer le sujet
+    const subject = `Demande de contact - ${service}`;
+    
+    // Créer le corps du message
+    const body = `Bonjour,
+
+Je souhaite obtenir plus d'informations sur vos services.
+
+Nom : ${name}
+Email : ${email}
+Service souhaité : ${service}
+
+Message :
+${message}
+
+Cordialement,
+${name}`;
+    
+    // Encoder les paramètres pour l'URL
+    const encodedSubject = encodeURIComponent(subject);
+    const encodedBody = encodeURIComponent(body);
+    
+    // Créer l'URL mailto
+    const mailtoUrl = `mailto:contact@stoss.fr?subject=${encodedSubject}&body=${encodedBody}`;
+    
+    // Ouvrir la boîte mail
+    window.open(mailtoUrl, '_blank');
+    
+    // Afficher un message de confirmation
+    showSuccessMessage();
 }
 
 // Validation des champs
@@ -306,6 +344,8 @@ function clearFieldError(field) {
     }
 }
 
+
+
 // Message de succès
 function showSuccessMessage() {
     const form = document.querySelector('.contact-form');
@@ -324,8 +364,8 @@ function showSuccessMessage() {
         animation: fadeIn 0.5s ease;
     `;
     successMessage.innerHTML = `
-        <i class="fas fa-check-circle"></i>
-        Merci ! Votre message a été envoyé avec succès.
+        <i class="fas fa-envelope-open"></i>
+        Votre boîte mail s'est ouverte ! Vérifiez votre application de messagerie.
     `;
     
     form.insertBefore(successMessage, form.firstChild);
