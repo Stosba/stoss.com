@@ -191,7 +191,10 @@ p {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, rgba(248, 253, 253, 0.9) 0%, rgba(32, 178, 170, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(248, 253, 253, 0.9) 0%, rgba(32, 178, 170, 0.05) 100%), url('circuit-board-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
     padding: 120px 0 80px;
@@ -219,7 +222,10 @@ p {
 
 /* Dark mode */
 .dark-mode .hero {
-    background: linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(32, 178, 170, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(32, 178, 170, 0.05) 100%), url('circuit-board-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .dark-mode .hero::before {
@@ -228,6 +234,11 @@ p {
         radial-gradient(circle at 80% 70%, rgba(72, 209, 204, 0.3) 0%, transparent 25%),
         radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.2) 0%, transparent 35%);
     opacity: 0.8;
+}
+
+.dark-mode .hero-content {
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.9) 100%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes subtleMove {
@@ -256,6 +267,13 @@ p {
 
 .hero-content {
     animation: fadeInUp 1s ease-out;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 253, 253, 0.9) 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 2;
 }
 
 .hero-title {
@@ -1073,6 +1091,23 @@ p {
     color: #bdc3c7;
 }
 
+.footer-bottom .attribution {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.footer-bottom .attribution a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom .attribution a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-container {
@@ -1403,5 +1438,17 @@ body.dark-mode {
 
 .dark-mode .nav-menu .nav-link:hover {
     color: var(--primary-color);
+}
+
+.dark-mode .footer-bottom .attribution {
+    color: #95a5a6;
+}
+
+.dark-mode .footer-bottom .attribution a {
+    color: var(--primary-color);
+}
+
+.dark-mode .footer-bottom .attribution a:hover {
+    color: var(--secondary-color);
 }
 
