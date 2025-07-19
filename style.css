@@ -670,6 +670,210 @@ p {
     background: var(--background-white);
 }
 
+/* Certifications Section */
+.certifications {
+    padding: 80px 0;
+    background: var(--background-light);
+}
+
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.certification-card {
+    background: var(--background-white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.certification-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.certification-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.certification-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.certification-description {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.certification-tags {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr));
+    gap: 0.5rem;
+    align-items: start;
+}
+
+.cert-tag {
+    background: var(--primary-color);
+    color: var(--background-white);
+    padding: 0.2rem 0.6rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    display: inline-block;
+    word-break: keep-all;
+    hyphens: none;
+    margin: 0.1rem;
+    line-height: 1.2;
+}
+
+/* Cloud Solutions Section */
+.cloud-solutions {
+    padding: 80px 0;
+    background: var(--background-white);
+}
+
+.solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.solution-card {
+    background: var(--background-white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.solution-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.solution-card.featured {
+    border: 2px solid var(--primary-color);
+    background: linear-gradient(135deg, rgba(32, 178, 170, 0.02), rgba(72, 209, 204, 0.02));
+    position: relative;
+}
+
+.solution-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.solution-title {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.solution-description {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.solution-features {
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+
+.solution-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.solution-features i {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.solution-highlight {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.solution-highlight:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.solution-highlight i {
+    color: #ffd700;
+}
+
+.contact-highlight {
+    background: linear-gradient(135deg, #20b2aa, #48d1cc);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-highlight i {
+    color: #ffd700;
+    font-size: 1.2rem;
+}
+
 .about-content {
     display: flex;
     flex-direction: column;
@@ -958,6 +1162,14 @@ p {
         gap: 1rem;
     }
     
+    .certifications-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .solutions-grid {
+        grid-template-columns: 1fr;
+    }
+    
     /* Activer les cartes dépliables en mobile */
     .project-card {
         padding: 1.5rem;
@@ -1136,7 +1348,9 @@ body.dark-mode {
 
 .dark-mode .service-card,
 .dark-mode .project-card,
-.dark-mode .contact-form {
+.dark-mode .contact-form,
+.dark-mode .certification-card,
+.dark-mode .solution-card {
     background-color: #1e1e1e;
     border-color: #333;
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
