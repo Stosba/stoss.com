@@ -10,6 +10,40 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScrolling();
 });
 
+// Dark mode :
+const toggleButton = document.getElementById('darkModeToggle');
+
+toggleButton.addEventListener('click', () => {
+    // Basculer le mode sombre
+    document.body.classList.toggle('dark-mode');
+    
+    // Appliquer à toutes les sections principales
+    document.querySelectorAll('section, .header, .footer, .container, .card').forEach(el => {
+        el.classList.toggle('dark-mode');
+    });
+    
+    // Changer l'icône
+    const icon = toggleButton.querySelector('i');
+    if (document.body.classList.contains('dark-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+        toggleButton.title = "Mode Clair";
+    } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+        toggleButton.title = "Mode Sombre";
+    }
+    
+    // Sauvegarder la préférence
+    localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+});
+
+// Appliquer le mode au chargement si activé précédemment
+if (localStorage.getItem('dark-mode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+    document.querySelectorAll('section, .header, .footer, .container, .card').forEach(el => {
+        el.classList.add('dark-mode');
+    });
+}
+
 // Navigation mobile
 function initNavigation() {
     const navToggle = document.querySelector('.nav-toggle');
@@ -81,8 +115,19 @@ function initScrollEffects() {
     }, observerOptions);
 
     // Observer tous les éléments à animer
-    const elementsToAnimate = document.querySelectorAll('.service-card, .stat-item, .about-graphic, .contact-form, .contact-info');
+    const elementsToAnimate = document.querySelectorAll('.service-card, .stat-item, .contact-form, .contact-info');
     elementsToAnimate.forEach(el => observer.observe(el));
+
+     // Effet de parallaxe pour les motifs
+     window.addEventListener('scroll', function() {
+        const scrolled = window.scrollY;
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            const speed = 0.2;
+            const yPos = -(scrolled * speed);
+            hero.style.backgroundPosition = `center ${yPos}px`;
+        }
+    });
 }
 
 // Animations spécifiques
@@ -308,7 +353,7 @@ function initSmoothScrolling() {
 // Effets de parallaxe légers
 window.addEventListener('scroll', function() {
     const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('.hero-graphic, .about-graphic');
+    const parallaxElements = document.querySelectorAll('.hero-graphic');
     
     parallaxElements.forEach(element => {
         const speed = 0.5;
