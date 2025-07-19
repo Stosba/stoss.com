@@ -164,6 +164,23 @@ p {
     cursor: pointer;
 }
 
+/* Styles pour le bouton dark mode */
+#darkModeToggle {
+    padding: 0.5rem;
+    min-width: auto;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-left: 0.5rem;
+}
+
+#darkModeToggle i {
+    font-size: 1rem;
+}
+
 .bar {
     width: 25px;
     height: 3px;
@@ -427,11 +444,82 @@ p {
     box-shadow: var(--shadow-medium);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid var(--border-color);
+    cursor: pointer;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-heavy);
+}
+
+/* Styles pour les cartes dépliables en mobile */
+.project-card .project-description,
+.project-card .project-tech {
+    transition: all 0.3s ease;
+}
+
+/* Styles de base pour les cartes repliées - UNIQUEMENT en mobile */
+.project-card.collapsed .project-description,
+.project-card.collapsed .project-tech {
+    display: none !important;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.project-card:not(.collapsed) .project-description,
+.project-card:not(.collapsed) .project-tech {
+    display: block !important;
+    opacity: 1;
+    max-height: 500px;
+    transition: all 0.3s ease;
+}
+
+/* Sur desktop, forcer l'affichage complet des cartes */
+@media (min-width: 769px) {
+    .project-card .project-description,
+    .project-card .project-tech {
+        display: block !important;
+        opacity: 1 !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    .project-card .expand-toggle {
+        display: none !important;
+    }
+}
+
+.project-card .expand-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.project-card .expand-toggle:hover {
+    background: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+.project-card .expand-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.project-card.collapsed .expand-toggle i {
+    transform: rotate(0deg);
+}
+
+.project-card:not(.collapsed) .expand-toggle i {
+    transform: rotate(180deg);
 }
 
 .project-icon {
@@ -461,9 +549,10 @@ p {
 }
 
 .project-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr));
+    gap: 0.6rem;
+    align-items: start;
 }
 
 .tech-tag {
@@ -473,6 +562,12 @@ p {
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
+    white-space: nowrap;
+    display: inline-block;
+    word-break: keep-all;
+    hyphens: none;
+    margin: 0.1rem;
+    line-height: 1.2;
 }
 
 .section-header {
@@ -776,25 +871,54 @@ p {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .nav-container {
+        padding: 0 15px;
+    }
+    
     .nav-menu {
         position: fixed;
-        left: -100%;
         top: 70px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-100%);
         flex-direction: column;
         background-color: white;
-        width: 100%;
+        width: 90%;
+        max-width: 300px;
         text-align: center;
-        transition: 0.3s;
+        transition: 0.3s ease;
         box-shadow: var(--shadow-medium);
         padding: 2rem 0;
+        border-radius: 15px;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 999;
     }
 
     .nav-menu.active {
-        left: 0;
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+        visibility: visible;
     }
 
     .nav-toggle {
         display: flex;
+    }
+    
+    /* Optimisation du bouton dark mode en mobile */
+    #darkModeToggle {
+        width: 36px;
+        height: 36px;
+        padding: 0.4rem;
+        margin-left: 0.3rem;
+    }
+    
+    #darkModeToggle i {
+        font-size: 0.9rem;
+    }
+    
+    /* Ajustement du logo en mobile */
+    .logo {
+        height: 35px;
     }
 
     .hero-container {
@@ -807,9 +931,22 @@ p {
         font-size: 2.5rem;
     }
 
-    .hero-graphic {
-        width: 300px;
-        height: 300px;
+    /* Masquer hero-image en mobile */
+    .hero-image {
+        display: none;
+    }
+    
+    /* Centrer tous les boutons en mobile */
+    .btn {
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+        align-items: center;
     }
 
     .services-grid {
@@ -818,6 +955,36 @@ p {
 
     .projects-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    /* Activer les cartes dépliables en mobile */
+    .project-card {
+        padding: 1.5rem;
+        position: relative;
+    }
+    
+    .project-tech {
+        gap: 0.5rem;
+    }
+    
+    .tech-tag {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.6rem;
+    }
+    
+    .project-card .expand-toggle {
+        display: flex !important;
+        visibility: visible !important;
+    }
+    
+    .project-card.collapsed {
+        padding-bottom: 1rem;
+    }
+    
+    .project-card.collapsed .project-description,
+    .project-card.collapsed .project-tech {
+        display: none;
     }
 
     .about-content {
@@ -855,6 +1022,31 @@ p {
 }
 
 @media (max-width: 480px) {
+    .nav-container {
+        padding: 0 10px;
+    }
+    
+    .logo {
+        height: 30px;
+    }
+    
+    #darkModeToggle {
+        width: 32px;
+        height: 32px;
+        padding: 0.3rem;
+        margin-left: 0.2rem;
+    }
+    
+    #darkModeToggle i {
+        font-size: 0.8rem;
+    }
+    
+    .nav-menu {
+        width: 95%;
+        max-width: 280px;
+        border-radius: 12px;
+    }
+    
     .hero-title {
         font-size: 2rem;
     }
@@ -866,11 +1058,14 @@ p {
     .hero-buttons {
         flex-direction: column;
         align-items: center;
+        gap: 1rem;
     }
 
     .btn {
         width: 100%;
         max-width: 250px;
+        justify-content: center;
+        text-align: center;
     }
 
     .services-grid {
@@ -980,5 +1175,19 @@ body.dark-mode {
 /* Dark mode pour les lignes simples */
 .dark-mode .hero-graphic::before {
     opacity: 0.8;
+}
+
+/* Dark mode pour le menu mobile */
+.dark-mode .nav-menu {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+}
+
+.dark-mode .nav-menu .nav-link {
+    color: var(--text-dark);
+}
+
+.dark-mode .nav-menu .nav-link:hover {
+    color: var(--primary-color);
 }
 

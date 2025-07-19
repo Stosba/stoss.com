@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
     initContactForm();
     initSmoothScrolling();
+    initProjectCards();
 });
 
 // Dark mode :
@@ -200,7 +201,12 @@ function animateCard(card) {
 
 // Formulaire de contact
 function initContactForm() {
-    const form = document.getElementById('contactForm');
+    const form = document.querySelector('.contact-form');
+    if (!form) {
+        console.log('Formulaire de contact non trouvé');
+        return;
+    }
+    
     const inputs = form.querySelectorAll('input, select, textarea');
     
     // Validation en temps réel
@@ -258,7 +264,9 @@ function validateField(field) {
 
 // Validation complète du formulaire
 function validateForm() {
-    const form = document.getElementById('contactForm');
+    const form = document.querySelector('.contact-form');
+    if (!form) return false;
+    
     const inputs = form.querySelectorAll('input, select, textarea');
     let isValid = true;
     
@@ -300,7 +308,9 @@ function clearFieldError(field) {
 
 // Message de succès
 function showSuccessMessage() {
-    const form = document.getElementById('contactForm');
+    const form = document.querySelector('.contact-form');
+    if (!form) return;
+    
     const successMessage = document.createElement('div');
     successMessage.className = 'success-message';
     successMessage.style.cssText = `
@@ -393,6 +403,73 @@ function preloadImages() {
 
 // Initialiser le préchargement
 preloadImages();
+
+// Gestion des cartes de projets dépliables en mobile
+function initProjectCards() {
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    projectCards.forEach((card, index) => {
+        const toggleBtn = card.querySelector('.expand-toggle');
+        
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                
+                // Vérifier que nous sommes en mode mobile
+                if (window.innerWidth <= 768) {
+                    // Toggle de la classe collapsed
+                    if (card.classList.contains('collapsed')) {
+                        card.classList.remove('collapsed');
+                    } else {
+                        card.classList.add('collapsed');
+                    }
+                    
+                    // Animer l'icône
+                    const icon = this.querySelector('i');
+                    if (card.classList.contains('collapsed')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                }
+            });
+        }
+        
+        // Permettre de cliquer sur toute la carte pour la déplier
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('.expand-toggle')) return; // Éviter le double déclenchement
+            
+            if (window.innerWidth <= 768) {
+                // Toggle de la classe collapsed
+                if (this.classList.contains('collapsed')) {
+                    this.classList.remove('collapsed');
+                } else {
+                    this.classList.add('collapsed');
+                }
+                
+                const toggleBtn = this.querySelector('.expand-toggle');
+                const icon = toggleBtn.querySelector('i');
+                
+                if (this.classList.contains('collapsed')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            }
+        });
+    });
+    
+    // Gérer le redimensionnement de la fenêtre
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            // Sur desktop, s'assurer que toutes les cartes sont dépliées
+            projectCards.forEach(card => {
+                card.classList.remove('collapsed');
+            });
+        }
+    });
+}
 
 // Gestion des erreurs
 window.addEventListener('error', function(e) {
