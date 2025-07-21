@@ -688,81 +688,7 @@ p {
     background: var(--background-white);
 }
 
-/* Certifications Section */
-.certifications {
-    padding: 80px 0;
-    background: var(--background-light);
-}
 
-.certifications-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.certification-card {
-    background: var(--background-white);
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: var(--shadow-light);
-    transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
-    text-align: center;
-}
-
-.certification-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-medium);
-}
-
-.certification-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    font-size: 2rem;
-    color: white;
-}
-
-.certification-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-}
-
-.certification-description {
-    color: var(--text-light);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-.certification-tags {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr));
-    gap: 0.5rem;
-    align-items: start;
-}
-
-.cert-tag {
-    background: var(--primary-color);
-    color: var(--background-white);
-    padding: 0.2rem 0.6rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    white-space: nowrap;
-    display: inline-block;
-    word-break: keep-all;
-    hyphens: none;
-    margin: 0.1rem;
-    line-height: 1.2;
-}
 
 /* Cloud Solutions Section */
 .cloud-solutions {
@@ -882,7 +808,7 @@ p {
     margin-top: 1.5rem;
     text-align: center;
     box-shadow: var(--shadow-light);
-    max-width: 450px;
+    max-width: 260px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -1197,9 +1123,7 @@ p {
         gap: 1rem;
     }
     
-    .certifications-grid {
-        grid-template-columns: 1fr;
-    }
+
     
     .solutions-grid {
         grid-template-columns: 1fr;
@@ -1450,6 +1374,81 @@ body.dark-mode {
 
 .dark-mode .footer-bottom .attribution a:hover {
     color: var(--secondary-color);
+}
+
+/* Certifications intégrées dans About */
+.about-certifications {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.about-certifications h3 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.certifications-mini {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.cert-mini {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(32, 178, 170, 0.1), rgba(72, 209, 204, 0.1));
+    border: 1px solid rgba(32, 178, 170, 0.2);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+.cert-mini:hover {
+    background: linear-gradient(135deg, rgba(32, 178, 170, 0.2), rgba(72, 209, 204, 0.2));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(32, 178, 170, 0.15);
+}
+
+.cert-mini i {
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+/* Dark mode pour les certifications miniatures */
+.dark-mode .about-certifications {
+    border-top-color: #333;
+}
+
+.dark-mode .cert-mini {
+    background: linear-gradient(135deg, rgba(32, 178, 170, 0.15), rgba(72, 209, 204, 0.15));
+    border-color: rgba(32, 178, 170, 0.3);
+    color: var(--text-dark);
+}
+
+.dark-mode .cert-mini:hover {
+    background: linear-gradient(135deg, rgba(32, 178, 170, 0.25), rgba(72, 209, 204, 0.25));
+}
+
+/* Responsive pour les certifications miniatures */
+@media (max-width: 768px) {
+    .certifications-mini {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .cert-mini {
+        justify-content: center;
+        text-align: center;
+    }
 }
 
 /* Netlify Forms - Masquer le champ honeypot */
